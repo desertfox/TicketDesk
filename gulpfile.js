@@ -1,37 +1,25 @@
 var gulp = require('gulp');
-var source = require('vinyl-source-stream'); // Used to stream bundle for further handling
-var browserify = require('browserify');
-var watchify = require('watchify');
-var uglifyify = require('uglifyify');
+var uglify = require('gulp-uglify');
 var react = require('gulp-react');
+var browserify = require('gulp-browserify');
 
 gulp.task('transpile-js', function() {
-  return gulp.src([
+   return gulp.src([
     'app/main.jsx',
     'app/components/*.jsx'], { base : 'app/'})
     .pipe(react({harmony: true}))
-    .pipe(gulp.dest('./build/'))
-});
-
-gulp.task('react-transform', ['transpile-js'], function() {
-    var bundler = browserify({
-        entries: ['./build/main.js'],
-        debug: false,
-        transform: [uglifyify],
-        cache: {}, 
-        packageCache: {}, 
-        fullPaths: false 
-    });
-    var watcher  = watchify(bundler);
-    return watcher
-    .on('update', function () {
-        watcher.bundle()
-        .pipe(source('main.js'))
-        .pipe(gulp.dest('./build/'));
-    })
-    .bundle() 
-    .pipe(source('main.js'))
     .pipe(gulp.dest('./build/'));
 });
 
-gulp.task('default', ['transpile-js', 'react-transform']);
+gulp.task('webify', ['transpile-js'], function() {
+    return gulp.src('build/main.js')
+        .pipe(browserify())
+        .pipe(gulp.dest('./build/'));
+});
+
+gulp.task('ugly', ['webify'], function() {
+   return gulp.src('build/main.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('./build/'));
+});
+gulp.task('default', ['transpile-js', 'webify', 'ugly']);

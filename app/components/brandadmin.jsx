@@ -129,46 +129,30 @@ var BrandAdmin =  React.createClass({
 	render: function() {
     	return ( 
     		<div>
-	    		<table className="swamp-add">
-		    		<tbody>
-		    		<tr>
-		    			<td>Company:</td>
-		    			<td><AddButton value="addCompany" callback={this.addForm} /></td>
-	    			
-		    		</tr>
-		    		<tr>
-		    			<td>Queue/Dept:</td>
-		    			<td><AddButton value="addQueue" callback={this.addForm} /></td>
-		    		</tr>
-		    		<tr>
-		    			<td>Route:</td>
-		    			<td><AddButton value="addRoute" callback={this.addForm} /></td>		    				    			
-		    		</tr>
-		    		<tr>
-		    			<td>AutoResponses</td>
-		    			<td><AddButton value="addAutoResponse" callback={this.addForm} /></td>		    				
-		    		</tr>
-		    		<tr>
-		    			<td>Conditions:</td>
-		    			<td><AddButton value="addCondition" callback={this.addForm} /></td>
-		    		</tr>
-		    		</tbody>
-		    	</table>		    		
-		    	
-		    	{this.state.view != 'NONE' && this.showForm()}
+	    		<div className="swamp-add">
+	    			<ul>
+						<li><AddButton value="addCompany" callback={this.addForm} />Company</li>
+						<li><AddButton value="addQueue" callback={this.addForm} />Queue/Dept</li>
+						<li><AddButton value="addRoute" callback={this.addForm} />Route</li>
+		    			<li><AddButton value="addAutoResponse" callback={this.addForm} />AutoResponses</li>
+	    			</ul>
+		    		{this.state.view != 'NONE' && this.showForm()}
+				</div>    		
+		    			    			    	
 		    	{this.state.showConditions && <Conditions conditions={this.state.route.conditions} />}
 		    	
-		    	<table className="swamp-routes">
-		    		<tbody>
-		    		<tr>
-		    			<td><CompanySelect companies={this.state.companies} callback={this.selectCompany} /></td>
-		    			<td><RouteSelect routes={this.state.company.routes} callback={this.selectQueue} /></td>
-		    			<td><AutoResponseSelect autoresponses={this.state.autoresponses} /></td>		    			
-		    			<td><ShowConditions callback={this.toggleCondition} /></td>
-		    			<td></td>
-		    		</tr>
-		    		</tbody>
-	    		</table>
+		    	<div className="swamp-routes">
+		    		<ul>
+		    			<li>
+		    			<CompanySelect companies={this.state.companies} callback={this.selectCompany} />
+		    			<RouteSelect routes={this.state.company.routes} callback={this.selectQueue} />
+		    			<AddButton value="addCondition" callback={this.addForm} />Conditions
+		    			<AutoResponseSelect autoresponses={this.state.autoresponses} />  			
+		    			<ShowConditions callback={this.toggleCondition} />
+		    			</li>
+		    		</ul>
+	    		</div>
+
 			</div>
 		);
   	}

@@ -129,46 +129,30 @@ var BrandAdmin =  React.createClass({displayName: "BrandAdmin",
 	render: function() {
     	return ( 
     		React.createElement("div", null, 
-	    		React.createElement("table", {className: "swamp-add"}, 
-		    		React.createElement("tbody", null, 
-		    		React.createElement("tr", null, 
-		    			React.createElement("td", null, "Company:"), 
-		    			React.createElement("td", null, React.createElement(AddButton, {value: "addCompany", callback: this.addForm}))
-	    			
-		    		), 
-		    		React.createElement("tr", null, 
-		    			React.createElement("td", null, "Queue/Dept:"), 
-		    			React.createElement("td", null, React.createElement(AddButton, {value: "addQueue", callback: this.addForm}))
-		    		), 
-		    		React.createElement("tr", null, 
-		    			React.createElement("td", null, "Route:"), 
-		    			React.createElement("td", null, React.createElement(AddButton, {value: "addRoute", callback: this.addForm}))		    				    			
-		    		), 
-		    		React.createElement("tr", null, 
-		    			React.createElement("td", null, "AutoResponses"), 
-		    			React.createElement("td", null, React.createElement(AddButton, {value: "addAutoResponse", callback: this.addForm}))		    				
-		    		), 
-		    		React.createElement("tr", null, 
-		    			React.createElement("td", null, "Conditions:"), 
-		    			React.createElement("td", null, React.createElement(AddButton, {value: "addCondition", callback: this.addForm}))
-		    		)
-		    		)
-		    	), 		    		
-		    	
-		    	this.state.view != 'NONE' && this.showForm(), 
+	    		React.createElement("div", {className: "swamp-add"}, 
+	    			React.createElement("ul", null, 
+						React.createElement("li", null, React.createElement(AddButton, {value: "addCompany", callback: this.addForm}), "Company"), 
+						React.createElement("li", null, React.createElement(AddButton, {value: "addQueue", callback: this.addForm}), "Queue/Dept"), 
+						React.createElement("li", null, React.createElement(AddButton, {value: "addRoute", callback: this.addForm}), "Route"), 
+		    			React.createElement("li", null, React.createElement(AddButton, {value: "addAutoResponse", callback: this.addForm}), "AutoResponses")
+	    			), 
+		    		this.state.view && this.showForm()
+				), 		
+		    			    			    	
 		    	this.state.showConditions && React.createElement(Conditions, {conditions: this.state.route.conditions}), 
 		    	
-		    	React.createElement("table", {className: "swamp-routes"}, 
-		    		React.createElement("tbody", null, 
-		    		React.createElement("tr", null, 
-		    			React.createElement("td", null, React.createElement(CompanySelect, {companies: this.state.companies, callback: this.selectCompany})), 
-		    			React.createElement("td", null, React.createElement(RouteSelect, {routes: this.state.company.routes, callback: this.selectQueue})), 
-		    			React.createElement("td", null, React.createElement(AutoResponseSelect, {autoresponses: this.state.autoresponses})), 		    			
-		    			React.createElement("td", null, React.createElement(ShowConditions, {callback: this.toggleCondition})), 
-		    			React.createElement("td", null)
-		    		)
+		    	React.createElement("div", {className: "swamp-routes"}, 
+		    		React.createElement("ul", null, 
+		    			React.createElement("li", null, 
+		    			React.createElement(CompanySelect, {companies: this.state.companies, callback: this.selectCompany}), 
+		    			React.createElement(RouteSelect, {routes: this.state.company.routes, callback: this.selectQueue}), 
+		    			React.createElement(AddButton, {value: "addCondition", callback: this.addForm}), "Conditions", 
+		    			React.createElement(AutoResponseSelect, {autoresponses: this.state.autoresponses}), 			
+		    			React.createElement(ShowConditions, {callback: this.toggleCondition})
+		    			)
 		    		)
 	    		)
+
 			)
 		);
   	}
