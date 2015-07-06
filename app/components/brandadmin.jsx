@@ -1,11 +1,8 @@
+/** @jsx React.DOM */
 var React = require('react');
-var AddButton = require('./misc.jsx');
-var CompanySelect = require('./company.jsx');
-var RouteSelect = require('./route.jsx');
-var AutoResponseSelect = require('./autoresponses.jsx');
-var ShowConditions = require('./conditions.jsx');
+var _ = require('lodash');
 
-module.exports = React.createClass({
+var BrandAdmin =  React.createClass({
 	getInitialState: function() {
 	    var	companies = [ 
 		    { 
@@ -178,3 +175,174 @@ module.exports = React.createClass({
   	}
 });
 //{this.state.showConditions && <Conditions conditions={this.state.route.conditions} />}
+
+var CompanySelect = React.createClass({
+	render: function() {
+		return (
+				<select className="companies" onChange={this.props.callback}>
+					{this.props.companies.map(function(company) {
+						return (
+							<CompanyOption value={company} key={company.id} />
+						);
+					})}
+				</select>
+		);
+	}
+});
+var CompanyCreate = React.createClass({
+	render: function() {
+		return (
+			<form>
+				Name:<input type="text" />
+				TLD:<input type="text" />
+				user_portal:<input type="text" />
+				<button>ADD</button>
+			</form>
+		);
+	}
+});
+var CompanyOption = React.createClass({
+	render: function() {
+		return (
+			<option value={this.props.value.id}>
+				{this.props.value.title}
+			</option>
+		);
+	}
+});
+var RouteSelect = React.createClass({
+	render: function() {
+		return (
+				<select className="routes" onChange={this.props.callback}>
+					{this.props.routes.map(function(route) {
+						return ( 
+							<RouteOption value={route} key={route.id} />
+						);
+					})}
+				</select>
+		);
+	}
+});
+var RouteCreate = React.createClass({
+	render: function() {
+		return (
+			<form>
+				Name:<input type="text" />
+				Dept: <select><option>Def</option></select>
+				AutoResponses: <AutoResponseSelect autoresponses={this.props.autoresponses} />
+				<button>ADD</button>
+			</form>
+		);
+	}
+});
+var RouteOption = React.createClass({
+	render: function() {
+		return (
+			<option value={this.props.value.id}>
+				Route ID: {this.props.value.id}	Dept: {this.props.value.queue_title}
+			</option>
+		);
+	}
+});
+var AutoResponseSelect = React.createClass({
+	render: function() {
+		return ( 
+				<select className="autoresponses">
+					{this.props.autoresponses.map(function(autoresponse) {
+						return (
+							<AutoResponseOption value={autoresponse} key={autoresponse.id} />
+						);
+					})}
+				</select>
+		);
+	}
+});
+var AutoResponseCreate = React.createClass({
+	render: function() {
+		return (
+			<form>
+				Name:<input type="text" />
+				Subject:<input type="text" />
+				Body:<input type="textarea" />
+				<button>ADD</button>
+			</form>
+		);
+	}	
+});
+var AutoResponseOption = React.createClass({
+	render: function() {
+		return <option value={this.props.value.id}>{this.props.value.title}</option>;
+	}
+});
+var Conditions = React.createClass({
+	render: function() {
+		return (
+			<div className="conditions">
+				{this.props.conditions.map(function(condition) {
+					return (<div key={condition.id}>
+						ID:   {condition.id}<br />
+						FIELD:{condition.field}<br />
+						VALUE:{condition.value}<br />
+					</div>);
+				})}
+			</div>
+		);
+	}
+});
+var ConditionCreate = React.createClass({
+	render: function() {
+		return (
+			<form>
+				FIELD:<input type="text" />
+				VALUE:<input type="text" />
+				<button>ADD</button>
+			</form>
+		);
+	}
+});
+var ShowConditions = React.createClass({
+	render: function() {
+		return <button onClick={this.props.callback}>SHOW</button>
+	}
+});
+var QueueCreate = React.createClass({
+	render: function() {
+		return (
+			<form>
+				Name:<input type="text" />
+				Restricted:<input type="text" />
+				Company:<CompanySelect companies={this.props.companies} />
+				<button>ADD</button>
+			</form>
+		);
+	}
+});
+var QueueSelect = React.createClass({
+	render: function() {
+		return (
+				<select className="queues" onChange={this.props.callback}>
+					{this.props.routes.map(function(route) {
+						return ( 
+							<QueueOption value={route} key={route.id} />
+						);
+					})}
+				</select>
+		);
+	}
+});
+var QueueOption = React.createClass({
+	render: function() {
+		return (
+			<option value={this.props.value.queue_id}>
+				{this.props.value.queue_title}
+			</option>
+		);
+	}
+});
+var AddButton = React.createClass({
+	render: function() {
+		return <button value={this.props.value} onClick={this.props.callback}>+</button>;
+	}
+});
+
+module.exports = BrandAdmin;
