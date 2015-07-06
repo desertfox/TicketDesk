@@ -2,4 +2,4 @@
 var React = require('react');
 var BrandAdmin = require('./components/brandadmin.js');
 
-React.render(<BrandAdmin />, document.getElementById('ticket-desk'));
+React.render(<BrandAdmin test="test" />, document.getElementById('ticket-desk'));

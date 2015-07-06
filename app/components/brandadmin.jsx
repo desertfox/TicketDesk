@@ -57,8 +57,7 @@ var BrandAdmin =  React.createClass({
 					}]
 				}]
 			}
-		];
-	  
+		];	  
 	  	var autoresponses = [
 			{
 				"id": 1,
@@ -67,7 +66,6 @@ var BrandAdmin =  React.createClass({
 				"body": 'I like turtles'
 			},
 		];
-
 	    return {
 	       	view: false,
 	    	company: companies[0], 
@@ -158,6 +156,7 @@ var BrandAdmin =  React.createClass({
 		    	</table>		    		
 		    	
 		    	{this.state.view != 'NONE' && this.showForm()}
+		    	{this.state.showConditions && <Conditions conditions={this.state.route.conditions} />}
 		    	
 		    	<table className="swamp-routes">
 		    		<tbody>
@@ -174,8 +173,7 @@ var BrandAdmin =  React.createClass({
 		);
   	}
 });
-//{this.state.showConditions && <Conditions conditions={this.state.route.conditions} />}
-
+//
 var CompanySelect = React.createClass({
 	render: function() {
 		return (

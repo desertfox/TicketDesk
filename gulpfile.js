@@ -13,7 +13,7 @@ gulp.task('transpile-js', function() {
     .pipe(gulp.dest('./build/'))
 });
 
-gulp.task('react-transform', function() {
+gulp.task('react-transform', ['transpile-js'], function() {
     var bundler = browserify({
         entries: ['./build/main.js'],
         debug: false,
