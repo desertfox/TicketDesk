@@ -1,0 +1,32 @@
+{
+  "name": "ticketdesk",
+  "version": "1.0.0",
+  "description": "react ticket desk",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/desertfox/TicketDesk.git"
+  },
+  "keywords": [
+    "ReactJS"
+  ],
+  "author": "Rummy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/desertfox/TicketDesk/issues"
+  },
+  "homepage": "https://github.com/desertfox/TicketDesk#readme",
+  "devDependencies": {
+    "browserify": "^10.2.4",
+    "gulp": "^3.9.0",
+    "gulp-react": "^3.0.1",
+    "lodash": "^3.10.0",
+    "react": "^0.13.3",
+    "uglifyify": "^3.0.1",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.2.3"
+  }
+}

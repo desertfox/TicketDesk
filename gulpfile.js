@@ -3,7 +3,6 @@ var source = require('vinyl-source-stream'); // Used to stream bundle for furthe
 var browserify = require('browserify');
 var watchify = require('watchify');
 var uglifyify = require('uglifyify');
-var reactify = require('reactify'); 
 var react = require('gulp-react');
 
 gulp.task('transpile-js', function() {
